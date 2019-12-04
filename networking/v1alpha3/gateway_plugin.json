@@ -1,0 +1,186 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "v1alpha3"
+  },
+  "components": {
+    "schemas": {
+      "istio.networking.v1alpha3.GatewayPlugin": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "gateway": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "string"
+                }
+              },
+              "route": {
+                "type": "string",
+                "format": "string"
+              },
+              "settings": {
+                "$ref": "#/components/schemas/google.protobuf.Struct"
+              },
+              "user": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "host": {
+                "type": "string",
+                "format": "string"
+              },
+              "gateway": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "string"
+                }
+              },
+              "settings": {
+                "$ref": "#/components/schemas/google.protobuf.Struct"
+              },
+              "user": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "service": {
+                "type": "string",
+                "format": "string"
+              },
+              "gateway": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "string"
+                }
+              },
+              "settings": {
+                "$ref": "#/components/schemas/google.protobuf.Struct"
+              },
+              "user": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "google.protobuf.Struct": {
+        "description": "Represents a structured value.",
+        "type": "object",
+        "required": [
+          "fields"
+        ],
+        "properties": {
+          "fields": {
+            "description": "Unordered map of dynamically typed values.",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/google.protobuf.Value"
+            }
+          }
+        }
+      },
+      "google.protobuf.Value": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "nullValue": {
+                "$ref": "#/components/schemas/google.protobuf.NullValue"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "numberValue": {
+                "description": "Represents a double value.",
+                "type": "number",
+                "format": "double"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "stringValue": {
+                "description": "Represents a string value.",
+                "type": "string",
+                "format": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "boolValue": {
+                "description": "Represents a boolean value.",
+                "type": "boolean"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "structValue": {
+                "$ref": "#/components/schemas/google.protobuf.Struct"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "listValue": {
+                "$ref": "#/components/schemas/google.protobuf.ListValue"
+              }
+            }
+          }
+        ]
+      },
+      "google.protobuf.ListValue": {
+        "description": "Represents a repeated `Value`.",
+        "type": "object",
+        "properties": {
+          "values": {
+            "description": "Repeated field of dynamically typed values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/google.protobuf.Value"
+            }
+          }
+        }
+      },
+      "google.protobuf.NullValue": {
+        "description": "Represents a null value.",
+        "type": "string",
+        "enum": [
+          "NULL_VALUE"
+        ]
+      }
+    }
+  }
+}
