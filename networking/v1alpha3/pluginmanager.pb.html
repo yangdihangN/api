@@ -1,0 +1,71 @@
+---
+title: istio.networking.v1alpha3
+layout: protoc-gen-docs
+generator: protoc-gen-docs
+number_of_entries: 2
+---
+<h2 id="Plugin">Plugin</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="Plugin-enable">
+<td><code>enable</code></td>
+<td><code>bool</code></td>
+<td>
+</td>
+</tr>
+<tr id="Plugin-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+</td>
+</tr>
+<tr id="Plugin-settings">
+<td><code>settings</code></td>
+<td><code><a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct">google.protobuf.Struct</a></code></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="PluginManager">PluginManager</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="PluginManager-workload_labels">
+<td><code>workloadLabels</code></td>
+<td><code>map&lt;string,&nbsp;string&gt;</code></td>
+<td>
+<p>Zero or more labels that indicate a specific set of pods/VMs whose
+proxies should be configured to use these additional filters.  The
+scope of label search is platform dependent. On Kubernetes, for
+example, the scope includes pods running in all reachable
+namespaces. Omitting the selector applies the filter to all proxies in
+the mesh.</p>
+
+</td>
+</tr>
+<tr id="PluginManager-plugin">
+<td><code>plugin</code></td>
+<td><code><a href="https://istio.io/docs/reference/config/networking/v1alpha3/gateway.html#Plugin">Plugin[]</a></code></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
