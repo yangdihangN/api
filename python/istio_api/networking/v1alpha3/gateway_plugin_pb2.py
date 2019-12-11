@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='istio.networking.v1alpha3',
   syntax='proto3',
   serialized_options=_b('Z istio.io/api/networking/v1alpha3'),
-  serialized_pb=_b('\n(networking/v1alpha3/gateway_plugin.proto\x12\x19istio.networking.v1alpha3\x1a\x1cgoogle/protobuf/struct.proto\"\x9a\x01\n\rGatewayPlugin\x12\x0f\n\x07gateway\x18\x05 \x03(\t\x12\x0f\n\x05route\x18\x01 \x01(\tH\x00\x12\x0e\n\x04host\x18\x02 \x01(\tH\x00\x12\x11\n\x07service\x18\x03 \x01(\tH\x00\x12)\n\x08settings\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0c\n\x04user\x18\x06 \x03(\tB\x0b\n\tconditionB\"Z istio.io/api/networking/v1alpha3b\x06proto3')
+  serialized_pb=_b('\n(networking/v1alpha3/gateway_plugin.proto\x12\x19istio.networking.v1alpha3\x1a\x1cgoogle/protobuf/struct.proto\"\x9c\x01\n\rGatewayPlugin\x12\r\n\x05route\x18\x01 \x03(\t\x12\x0c\n\x04host\x18\x02 \x03(\t\x12\x0f\n\x07service\x18\x03 \x03(\t\x12)\n\x08settings\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07gateway\x18\x05 \x03(\t\x12\x0c\n\x04user\x18\x06 \x03(\t\x12\x13\n\x0bplugin_name\x18\x07 \x01(\tB\"Z istio.io/api/networking/v1alpha3b\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_struct__pb2.DESCRIPTOR,])
 
@@ -35,37 +35,37 @@ _GATEWAYPLUGIN = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='gateway', full_name='istio.networking.v1alpha3.GatewayPlugin.gateway', index=0,
-      number=5, type=9, cpp_type=9, label=3,
+      name='route', full_name='istio.networking.v1alpha3.GatewayPlugin.route', index=0,
+      number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='route', full_name='istio.networking.v1alpha3.GatewayPlugin.route', index=1,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='host', full_name='istio.networking.v1alpha3.GatewayPlugin.host', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='host', full_name='istio.networking.v1alpha3.GatewayPlugin.host', index=2,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='service', full_name='istio.networking.v1alpha3.GatewayPlugin.service', index=2,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='service', full_name='istio.networking.v1alpha3.GatewayPlugin.service', index=3,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='settings', full_name='istio.networking.v1alpha3.GatewayPlugin.settings', index=4,
+      name='settings', full_name='istio.networking.v1alpha3.GatewayPlugin.settings', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gateway', full_name='istio.networking.v1alpha3.GatewayPlugin.gateway', index=4,
+      number=5, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -73,6 +73,13 @@ _GATEWAYPLUGIN = _descriptor.Descriptor(
       name='user', full_name='istio.networking.v1alpha3.GatewayPlugin.user', index=5,
       number=6, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='plugin_name', full_name='istio.networking.v1alpha3.GatewayPlugin.plugin_name', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -87,24 +94,12 @@ _GATEWAYPLUGIN = _descriptor.Descriptor(
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
-    _descriptor.OneofDescriptor(
-      name='condition', full_name='istio.networking.v1alpha3.GatewayPlugin.condition',
-      index=0, containing_type=None, fields=[]),
   ],
   serialized_start=102,
-  serialized_end=256,
+  serialized_end=258,
 )
 
 _GATEWAYPLUGIN.fields_by_name['settings'].message_type = google_dot_protobuf_dot_struct__pb2._STRUCT
-_GATEWAYPLUGIN.oneofs_by_name['condition'].fields.append(
-  _GATEWAYPLUGIN.fields_by_name['route'])
-_GATEWAYPLUGIN.fields_by_name['route'].containing_oneof = _GATEWAYPLUGIN.oneofs_by_name['condition']
-_GATEWAYPLUGIN.oneofs_by_name['condition'].fields.append(
-  _GATEWAYPLUGIN.fields_by_name['host'])
-_GATEWAYPLUGIN.fields_by_name['host'].containing_oneof = _GATEWAYPLUGIN.oneofs_by_name['condition']
-_GATEWAYPLUGIN.oneofs_by_name['condition'].fields.append(
-  _GATEWAYPLUGIN.fields_by_name['service'])
-_GATEWAYPLUGIN.fields_by_name['service'].containing_oneof = _GATEWAYPLUGIN.oneofs_by_name['condition']
 DESCRIPTOR.message_types_by_name['GatewayPlugin'] = _GATEWAYPLUGIN
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 

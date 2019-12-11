@@ -24,17 +24,23 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type GatewayPlugin struct {
+	// route level plugin
+	Route []string `protobuf:"bytes,1,rep,name=route,proto3" json:"route,omitempty"`
+	// host level plugin
+	Host []string `protobuf:"bytes,2,rep,name=host,proto3" json:"host,omitempty"`
+	// service level plugin
+	Service []string `protobuf:"bytes,3,rep,name=service,proto3" json:"service,omitempty"`
+	// plugin settings
+	Settings *types.Struct `protobuf:"bytes,4,opt,name=settings,proto3" json:"settings,omitempty"`
+	// which gateway should use this plugin setting
 	Gateway []string `protobuf:"bytes,5,rep,name=gateway,proto3" json:"gateway,omitempty"`
-	// Types that are valid to be assigned to Condition:
-	//	*GatewayPlugin_Route
-	//	*GatewayPlugin_Host
-	//	*GatewayPlugin_Service
-	Condition            isGatewayPlugin_Condition `protobuf_oneof:"condition"`
-	Settings             *types.Struct             `protobuf:"bytes,4,opt,name=settings,proto3" json:"settings,omitempty"`
-	User                 []string                  `protobuf:"bytes,6,rep,name=user,proto3" json:"user,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
-	XXX_unrecognized     []byte                    `json:"-"`
-	XXX_sizecache        int32                     `json:"-"`
+	// which user should use this plugin setting
+	User []string `protobuf:"bytes,6,rep,name=user,proto3" json:"user,omitempty"`
+	// plugin name is the name of plugin, such as envoy.util, com.netease.transformation
+	PluginName           string   `protobuf:"bytes,7,opt,name=plugin_name,json=pluginName,proto3" json:"plugin_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *GatewayPlugin) Reset()         { *m = GatewayPlugin{} }
@@ -70,29 +76,30 @@ func (m *GatewayPlugin) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_GatewayPlugin proto.InternalMessageInfo
 
-type isGatewayPlugin_Condition interface {
-	isGatewayPlugin_Condition()
-	MarshalTo([]byte) (int, error)
-	Size() int
-}
-
-type GatewayPlugin_Route struct {
-	Route string `protobuf:"bytes,1,opt,name=route,proto3,oneof"`
-}
-type GatewayPlugin_Host struct {
-	Host string `protobuf:"bytes,2,opt,name=host,proto3,oneof"`
-}
-type GatewayPlugin_Service struct {
-	Service string `protobuf:"bytes,3,opt,name=service,proto3,oneof"`
-}
-
-func (*GatewayPlugin_Route) isGatewayPlugin_Condition()   {}
-func (*GatewayPlugin_Host) isGatewayPlugin_Condition()    {}
-func (*GatewayPlugin_Service) isGatewayPlugin_Condition() {}
-
-func (m *GatewayPlugin) GetCondition() isGatewayPlugin_Condition {
+func (m *GatewayPlugin) GetRoute() []string {
 	if m != nil {
-		return m.Condition
+		return m.Route
+	}
+	return nil
+}
+
+func (m *GatewayPlugin) GetHost() []string {
+	if m != nil {
+		return m.Host
+	}
+	return nil
+}
+
+func (m *GatewayPlugin) GetService() []string {
+	if m != nil {
+		return m.Service
+	}
+	return nil
+}
+
+func (m *GatewayPlugin) GetSettings() *types.Struct {
+	if m != nil {
+		return m.Settings
 	}
 	return nil
 }
@@ -104,34 +111,6 @@ func (m *GatewayPlugin) GetGateway() []string {
 	return nil
 }
 
-func (m *GatewayPlugin) GetRoute() string {
-	if x, ok := m.GetCondition().(*GatewayPlugin_Route); ok {
-		return x.Route
-	}
-	return ""
-}
-
-func (m *GatewayPlugin) GetHost() string {
-	if x, ok := m.GetCondition().(*GatewayPlugin_Host); ok {
-		return x.Host
-	}
-	return ""
-}
-
-func (m *GatewayPlugin) GetService() string {
-	if x, ok := m.GetCondition().(*GatewayPlugin_Service); ok {
-		return x.Service
-	}
-	return ""
-}
-
-func (m *GatewayPlugin) GetSettings() *types.Struct {
-	if m != nil {
-		return m.Settings
-	}
-	return nil
-}
-
 func (m *GatewayPlugin) GetUser() []string {
 	if m != nil {
 		return m.User
@@ -139,85 +118,11 @@ func (m *GatewayPlugin) GetUser() []string {
 	return nil
 }
 
-// XXX_OneofFuncs is for the internal use of the proto package.
-func (*GatewayPlugin) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _GatewayPlugin_OneofMarshaler, _GatewayPlugin_OneofUnmarshaler, _GatewayPlugin_OneofSizer, []interface{}{
-		(*GatewayPlugin_Route)(nil),
-		(*GatewayPlugin_Host)(nil),
-		(*GatewayPlugin_Service)(nil),
+func (m *GatewayPlugin) GetPluginName() string {
+	if m != nil {
+		return m.PluginName
 	}
-}
-
-func _GatewayPlugin_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*GatewayPlugin)
-	// condition
-	switch x := m.Condition.(type) {
-	case *GatewayPlugin_Route:
-		_ = b.EncodeVarint(1<<3 | proto.WireBytes)
-		_ = b.EncodeStringBytes(x.Route)
-	case *GatewayPlugin_Host:
-		_ = b.EncodeVarint(2<<3 | proto.WireBytes)
-		_ = b.EncodeStringBytes(x.Host)
-	case *GatewayPlugin_Service:
-		_ = b.EncodeVarint(3<<3 | proto.WireBytes)
-		_ = b.EncodeStringBytes(x.Service)
-	case nil:
-	default:
-		return fmt.Errorf("GatewayPlugin.Condition has unexpected type %T", x)
-	}
-	return nil
-}
-
-func _GatewayPlugin_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*GatewayPlugin)
-	switch tag {
-	case 1: // condition.route
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeStringBytes()
-		m.Condition = &GatewayPlugin_Route{x}
-		return true, err
-	case 2: // condition.host
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeStringBytes()
-		m.Condition = &GatewayPlugin_Host{x}
-		return true, err
-	case 3: // condition.service
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeStringBytes()
-		m.Condition = &GatewayPlugin_Service{x}
-		return true, err
-	default:
-		return false, nil
-	}
-}
-
-func _GatewayPlugin_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*GatewayPlugin)
-	// condition
-	switch x := m.Condition.(type) {
-	case *GatewayPlugin_Route:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(len(x.Route)))
-		n += len(x.Route)
-	case *GatewayPlugin_Host:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(len(x.Host)))
-		n += len(x.Host)
-	case *GatewayPlugin_Service:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(len(x.Service)))
-		n += len(x.Service)
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	return n
+	return ""
 }
 
 func init() {
@@ -229,24 +134,24 @@ func init() {
 }
 
 var fileDescriptor_fde08958efb731f8 = []byte{
-	// 263 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x90, 0xb1, 0x4e, 0xc3, 0x30,
-	0x10, 0x86, 0x31, 0x4d, 0x5b, 0xe2, 0x8a, 0xc5, 0x42, 0x60, 0x2a, 0x14, 0x45, 0x4c, 0x99, 0x6c,
-	0x41, 0xde, 0xa0, 0x0b, 0x8c, 0x28, 0x6c, 0x2c, 0x28, 0x0d, 0xc6, 0xb5, 0x88, 0x7c, 0x91, 0x7d,
-	0x69, 0xc5, 0x1b, 0xc2, 0xc6, 0x23, 0xa0, 0x3c, 0x09, 0x92, 0x9d, 0xc0, 0xc2, 0xe6, 0xff, 0xfc,
-	0xdd, 0xdd, 0xa7, 0xa3, 0x85, 0x55, 0x78, 0x00, 0xf7, 0x66, 0xac, 0x96, 0xfb, 0x9b, 0xba, 0xed,
-	0x76, 0x75, 0x29, 0x75, 0x8d, 0xea, 0x50, 0xbf, 0x3f, 0x77, 0x6d, 0xaf, 0x8d, 0x15, 0x9d, 0x03,
-	0x04, 0x76, 0x69, 0x3c, 0x1a, 0x10, 0x7f, 0xbc, 0x98, 0xf8, 0xf5, 0x95, 0x06, 0xd0, 0xad, 0x92,
-	0x01, 0xdc, 0xf6, 0xaf, 0xd2, 0xa3, 0xeb, 0x1b, 0x8c, 0x8d, 0xd7, 0x9f, 0x84, 0x9e, 0xde, 0xc5,
-	0x89, 0x0f, 0x61, 0x20, 0xe3, 0x74, 0x39, 0xae, 0xe0, 0xf3, 0x7c, 0x56, 0xa4, 0xd5, 0x14, 0xd9,
-	0x39, 0x9d, 0x3b, 0xe8, 0x51, 0x71, 0x92, 0x93, 0x22, 0xbd, 0x3f, 0xaa, 0x62, 0x64, 0x67, 0x34,
-	0xd9, 0x81, 0x47, 0x7e, 0x3c, 0x96, 0x43, 0x62, 0x6b, 0xba, 0xf4, 0xca, 0xed, 0x4d, 0xa3, 0xf8,
-	0x6c, 0xfc, 0x98, 0x0a, 0xac, 0xa4, 0x27, 0x5e, 0x21, 0x1a, 0xab, 0x3d, 0x4f, 0x72, 0x52, 0xac,
-	0x6e, 0x2f, 0x44, 0xd4, 0x14, 0x93, 0xa6, 0x78, 0x0c, 0x9a, 0xd5, 0x2f, 0xc8, 0x18, 0x4d, 0x7a,
-	0xaf, 0x1c, 0x5f, 0x04, 0xab, 0xf0, 0xde, 0xac, 0x68, 0xda, 0x80, 0x7d, 0x31, 0x68, 0xc0, 0x6e,
-	0xc4, 0xc7, 0x90, 0x91, 0xaf, 0x21, 0x23, 0xdf, 0x43, 0x46, 0x9e, 0xf2, 0x78, 0x12, 0x03, 0xb2,
-	0xee, 0x8c, 0xfc, 0xe7, 0x92, 0xdb, 0x45, 0xd8, 0x55, 0xfe, 0x04, 0x00, 0x00, 0xff, 0xff, 0xed,
-	0x05, 0xbc, 0xf6, 0x67, 0x01, 0x00, 0x00,
+	// 266 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x50, 0xbd, 0x4e, 0xc3, 0x30,
+	0x18, 0x94, 0xe9, 0x1f, 0x75, 0xc5, 0x62, 0x21, 0x61, 0x10, 0x0a, 0x11, 0x53, 0x26, 0x5b, 0x90,
+	0x37, 0x60, 0x61, 0x43, 0x28, 0x6c, 0x2c, 0x95, 0x5b, 0x7d, 0xb8, 0x16, 0x69, 0x1c, 0xd9, 0x9f,
+	0x5b, 0xf1, 0x86, 0x8c, 0x6c, 0xac, 0x28, 0x4f, 0x82, 0x62, 0x37, 0xb0, 0x74, 0xfb, 0xee, 0x74,
+	0xbe, 0x3b, 0x1f, 0x2d, 0x1a, 0xc0, 0xbd, 0x75, 0xef, 0xa6, 0xd1, 0x72, 0x77, 0xa7, 0xea, 0x76,
+	0xa3, 0x4a, 0xa9, 0x15, 0xc2, 0x5e, 0x7d, 0x2c, 0xdb, 0x3a, 0x68, 0xd3, 0x88, 0xd6, 0x59, 0xb4,
+	0xec, 0xd2, 0x78, 0x34, 0x56, 0xfc, 0xeb, 0xc5, 0xa0, 0xbf, 0xba, 0xd6, 0xd6, 0xea, 0x1a, 0x64,
+	0x14, 0xae, 0xc2, 0x9b, 0xf4, 0xe8, 0xc2, 0x1a, 0xd3, 0xc3, 0xdb, 0x6f, 0x42, 0xcf, 0x1e, 0x93,
+	0xe3, 0x73, 0x34, 0x64, 0xe7, 0x74, 0xe2, 0x6c, 0x40, 0xe0, 0x24, 0x1f, 0x15, 0xf3, 0x2a, 0x01,
+	0xc6, 0xe8, 0x78, 0x63, 0x3d, 0xf2, 0x93, 0x48, 0xc6, 0x9b, 0x71, 0x3a, 0xf3, 0xe0, 0x76, 0x66,
+	0x0d, 0x7c, 0x14, 0xe9, 0x01, 0xb2, 0x92, 0x9e, 0x7a, 0x40, 0x34, 0x8d, 0xf6, 0x7c, 0x9c, 0x93,
+	0x62, 0x71, 0x7f, 0x21, 0x52, 0x0d, 0x31, 0xd4, 0x10, 0x2f, 0xb1, 0x46, 0xf5, 0x27, 0xec, 0xed,
+	0x0e, 0x7f, 0xe3, 0x93, 0x64, 0x77, 0x80, 0x7d, 0x78, 0xf0, 0xe0, 0xf8, 0x34, 0x85, 0xf7, 0x37,
+	0xbb, 0xa1, 0x8b, 0xb4, 0xc0, 0xb2, 0x51, 0x5b, 0xe0, 0xb3, 0x9c, 0x14, 0xf3, 0x8a, 0x26, 0xea,
+	0x49, 0x6d, 0xe1, 0x41, 0x7c, 0x76, 0x19, 0xf9, 0xea, 0x32, 0xf2, 0xd3, 0x65, 0xe4, 0x35, 0x4f,
+	0x03, 0x19, 0x2b, 0x55, 0x6b, 0xe4, 0x91, 0x5d, 0x57, 0xd3, 0xd8, 0xac, 0xfc, 0x0d, 0x00, 0x00,
+	0xff, 0xff, 0x1b, 0x6b, 0xe4, 0x75, 0x75, 0x01, 0x00, 0x00,
 }
 
 func (m *GatewayPlugin) Marshal() (dAtA []byte, err error) {
@@ -272,6 +177,13 @@ func (m *GatewayPlugin) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	if m.XXX_unrecognized != nil {
 		i -= len(m.XXX_unrecognized)
 		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.PluginName) > 0 {
+		i -= len(m.PluginName)
+		copy(dAtA[i:], m.PluginName)
+		i = encodeVarintGatewayPlugin(dAtA, i, uint64(len(m.PluginName)))
+		i--
+		dAtA[i] = 0x3a
 	}
 	if len(m.User) > 0 {
 		for iNdEx := len(m.User) - 1; iNdEx >= 0; iNdEx-- {
@@ -303,57 +215,36 @@ func (m *GatewayPlugin) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x22
 	}
-	if m.Condition != nil {
-		{
-			size := m.Condition.Size()
-			i -= size
-			if _, err := m.Condition.MarshalTo(dAtA[i:]); err != nil {
-				return 0, err
-			}
+	if len(m.Service) > 0 {
+		for iNdEx := len(m.Service) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Service[iNdEx])
+			copy(dAtA[i:], m.Service[iNdEx])
+			i = encodeVarintGatewayPlugin(dAtA, i, uint64(len(m.Service[iNdEx])))
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if len(m.Host) > 0 {
+		for iNdEx := len(m.Host) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Host[iNdEx])
+			copy(dAtA[i:], m.Host[iNdEx])
+			i = encodeVarintGatewayPlugin(dAtA, i, uint64(len(m.Host[iNdEx])))
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	if len(m.Route) > 0 {
+		for iNdEx := len(m.Route) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Route[iNdEx])
+			copy(dAtA[i:], m.Route[iNdEx])
+			i = encodeVarintGatewayPlugin(dAtA, i, uint64(len(m.Route[iNdEx])))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *GatewayPlugin_Route) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
-}
-
-func (m *GatewayPlugin_Route) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	i -= len(m.Route)
-	copy(dAtA[i:], m.Route)
-	i = encodeVarintGatewayPlugin(dAtA, i, uint64(len(m.Route)))
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-func (m *GatewayPlugin_Host) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
-}
-
-func (m *GatewayPlugin_Host) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	i -= len(m.Host)
-	copy(dAtA[i:], m.Host)
-	i = encodeVarintGatewayPlugin(dAtA, i, uint64(len(m.Host)))
-	i--
-	dAtA[i] = 0x12
-	return len(dAtA) - i, nil
-}
-func (m *GatewayPlugin_Service) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
-}
-
-func (m *GatewayPlugin_Service) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	i -= len(m.Service)
-	copy(dAtA[i:], m.Service)
-	i = encodeVarintGatewayPlugin(dAtA, i, uint64(len(m.Service)))
-	i--
-	dAtA[i] = 0x1a
-	return len(dAtA) - i, nil
-}
 func encodeVarintGatewayPlugin(dAtA []byte, offset int, v uint64) int {
 	offset -= sovGatewayPlugin(v)
 	base := offset
@@ -371,8 +262,23 @@ func (m *GatewayPlugin) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.Condition != nil {
-		n += m.Condition.Size()
+	if len(m.Route) > 0 {
+		for _, s := range m.Route {
+			l = len(s)
+			n += 1 + l + sovGatewayPlugin(uint64(l))
+		}
+	}
+	if len(m.Host) > 0 {
+		for _, s := range m.Host {
+			l = len(s)
+			n += 1 + l + sovGatewayPlugin(uint64(l))
+		}
+	}
+	if len(m.Service) > 0 {
+		for _, s := range m.Service {
+			l = len(s)
+			n += 1 + l + sovGatewayPlugin(uint64(l))
+		}
 	}
 	if m.Settings != nil {
 		l = m.Settings.Size()
@@ -390,40 +296,13 @@ func (m *GatewayPlugin) Size() (n int) {
 			n += 1 + l + sovGatewayPlugin(uint64(l))
 		}
 	}
+	l = len(m.PluginName)
+	if l > 0 {
+		n += 1 + l + sovGatewayPlugin(uint64(l))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
-	return n
-}
-
-func (m *GatewayPlugin_Route) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Route)
-	n += 1 + l + sovGatewayPlugin(uint64(l))
-	return n
-}
-func (m *GatewayPlugin_Host) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Host)
-	n += 1 + l + sovGatewayPlugin(uint64(l))
-	return n
-}
-func (m *GatewayPlugin_Service) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Service)
-	n += 1 + l + sovGatewayPlugin(uint64(l))
 	return n
 }
 
@@ -492,7 +371,7 @@ func (m *GatewayPlugin) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Condition = &GatewayPlugin_Route{string(dAtA[iNdEx:postIndex])}
+			m.Route = append(m.Route, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
@@ -524,7 +403,7 @@ func (m *GatewayPlugin) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Condition = &GatewayPlugin_Host{string(dAtA[iNdEx:postIndex])}
+			m.Host = append(m.Host, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
@@ -556,7 +435,7 @@ func (m *GatewayPlugin) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Condition = &GatewayPlugin_Service{string(dAtA[iNdEx:postIndex])}
+			m.Service = append(m.Service, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
@@ -657,6 +536,38 @@ func (m *GatewayPlugin) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.User = append(m.User, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PluginName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGatewayPlugin
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGatewayPlugin
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGatewayPlugin
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PluginName = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

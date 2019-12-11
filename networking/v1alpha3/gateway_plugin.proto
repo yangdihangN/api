@@ -7,12 +7,24 @@ package istio.networking.v1alpha3;
 option go_package = "istio.io/api/networking/v1alpha3";
 
 message GatewayPlugin {
-repeated string gateway = 5;
-oneof condition {
-string route = 1;
-string host = 2;
-string service = 3;
-}
-google.protobuf.Struct settings = 4;
-repeated string user = 6;
+    // route level plugin
+    repeated string route = 1;
+
+    // host level plugin
+    repeated string host = 2;
+
+    // service level plugin
+    repeated string service = 3;
+
+    // plugin settings
+    google.protobuf.Struct settings = 4;
+
+    // which gateway should use this plugin setting
+    repeated string gateway = 5;
+
+    // which user should use this plugin setting
+    repeated string user = 6;
+
+    // plugin name is the name of plugin, such as envoy.util, com.netease.transformation
+    string plugin_name = 7;
 }

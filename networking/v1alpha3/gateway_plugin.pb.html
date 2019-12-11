@@ -15,40 +15,60 @@ number_of_entries: 1
 </tr>
 </thead>
 <tbody>
-<tr id="GatewayPlugin-gateway">
-<td><code>gateway</code></td>
+<tr id="GatewayPlugin-route">
+<td><code>route</code></td>
 <td><code>string[]</code></td>
 <td>
+<p>route level plugin</p>
+
 </td>
 </tr>
-<tr id="GatewayPlugin-route" class="oneof oneof-start">
-<td><code>route</code></td>
-<td><code>string (oneof)</code></td>
-<td>
-</td>
-</tr>
-<tr id="GatewayPlugin-host" class="oneof">
+<tr id="GatewayPlugin-host">
 <td><code>host</code></td>
-<td><code>string (oneof)</code></td>
+<td><code>string[]</code></td>
 <td>
+<p>host level plugin</p>
+
 </td>
 </tr>
-<tr id="GatewayPlugin-service" class="oneof">
+<tr id="GatewayPlugin-service">
 <td><code>service</code></td>
-<td><code>string (oneof)</code></td>
+<td><code>string[]</code></td>
 <td>
+<p>service level plugin</p>
+
 </td>
 </tr>
 <tr id="GatewayPlugin-settings">
 <td><code>settings</code></td>
 <td><code><a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct">google.protobuf.Struct</a></code></td>
 <td>
+<p>plugin settings</p>
+
+</td>
+</tr>
+<tr id="GatewayPlugin-gateway">
+<td><code>gateway</code></td>
+<td><code>string[]</code></td>
+<td>
+<p>which gateway should use this plugin setting</p>
+
 </td>
 </tr>
 <tr id="GatewayPlugin-user">
 <td><code>user</code></td>
 <td><code>string[]</code></td>
 <td>
+<p>which user should use this plugin setting</p>
+
+</td>
+</tr>
+<tr id="GatewayPlugin-plugin_name">
+<td><code>pluginName</code></td>
+<td><code>string</code></td>
+<td>
+<p>plugin name is the name of plugin, such as envoy.util, com.netease.transformation</p>
+
 </td>
 </tr>
 </tbody>
