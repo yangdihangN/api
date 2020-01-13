@@ -16,15 +16,18 @@ message GatewayPlugin {
     // service level plugin
     repeated string service = 3;
 
-    // plugin settings
-    google.protobuf.Struct settings = 4;
+    repeated plugins plugins = 4;
 
     // which gateway should use this plugin setting
     repeated string gateway = 5;
 
     // which user should use this plugin setting
     repeated string user = 6;
-
+}
+message plugins {
     // plugin name is the name of plugin, such as envoy.util, com.netease.transformation
-    string plugin_name = 7;
+    string name = 1;
+
+    // plugin settings
+    google.protobuf.Struct settings = 2;
 }

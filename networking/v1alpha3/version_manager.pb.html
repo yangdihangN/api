@@ -1,0 +1,290 @@
+---
+title: istio.networking.v1alpha3
+layout: protoc-gen-docs
+generator: protoc-gen-docs
+number_of_entries: 9
+---
+<h2 id="PodVersionStatus">PodVersionStatus</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="PodVersionStatus-pod_name">
+<td><code>podName</code></td>
+<td><code>string</code></td>
+<td>
+</td>
+</tr>
+<tr id="PodVersionStatus-current_version">
+<td><code>currentVersion</code></td>
+<td><code>string</code></td>
+<td>
+</td>
+</tr>
+<tr id="PodVersionStatus-last_update_time">
+<td><code>lastUpdateTime</code></td>
+<td><code>string</code></td>
+<td>
+</td>
+</tr>
+<tr id="PodVersionStatus-status_code">
+<td><code>statusCode</code></td>
+<td><code>int32</code></td>
+<td>
+<p>todo: implement</p>
+
+</td>
+</tr>
+<tr id="PodVersionStatus-status_message">
+<td><code>statusMessage</code></td>
+<td><code>string</code></td>
+<td>
+<p>todo：implement</p>
+
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="RetryPolicy">RetryPolicy</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="RetryPolicy-never_retry">
+<td><code>neverRetry</code></td>
+<td><code>bool</code></td>
+<td>
+</td>
+</tr>
+<tr id="RetryPolicy-retry_time">
+<td><code>retryTime</code></td>
+<td><code>int64</code></td>
+<td>
+</td>
+</tr>
+<tr id="RetryPolicy-retry_interval">
+<td><code>retryInterval</code></td>
+<td><code><a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#duration">google.protobuf.Duration</a></code></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="SidecarVersionSpec">SidecarVersionSpec</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="SidecarVersionSpec-via_deployment" class="oneof oneof-start">
+<td><code>viaDeployment</code></td>
+<td><code><a href="https://istio.io/docs/reference/config/networking/v1alpha3/gateway.html#ViaDeployment">ViaDeployment (oneof)</a></code></td>
+<td>
+</td>
+</tr>
+<tr id="SidecarVersionSpec-via_service" class="oneof">
+<td><code>viaService</code></td>
+<td><code><a href="https://istio.io/docs/reference/config/networking/v1alpha3/gateway.html#ViaService">ViaService (oneof)</a></code></td>
+<td>
+</td>
+</tr>
+<tr id="SidecarVersionSpec-via_stateful_set" class="oneof">
+<td><code>viaStatefulSet</code></td>
+<td><code><a href="https://istio.io/docs/reference/config/networking/v1alpha3/gateway.html#ViaStatefulSet">ViaStatefulSet (oneof)</a></code></td>
+<td>
+</td>
+</tr>
+<tr id="SidecarVersionSpec-via_label_selector" class="oneof">
+<td><code>viaLabelSelector</code></td>
+<td><code><a href="https://istio.io/docs/reference/config/networking/v1alpha3/gateway.html#ViaLabelSelector">ViaLabelSelector (oneof)</a></code></td>
+<td>
+</td>
+</tr>
+<tr id="SidecarVersionSpec-expected_version">
+<td><code>expectedVersion</code></td>
+<td><code>string</code></td>
+<td>
+</td>
+</tr>
+<tr id="SidecarVersionSpec-pods_hash">
+<td><code>podsHash</code></td>
+<td><code>string</code></td>
+<td>
+<p>calculate hashcode of pods update status , to confirm if an update is needed</p>
+
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="Status">Status</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="Status-sync_time">
+<td><code>syncTime</code></td>
+<td><code>string</code></td>
+<td>
+</td>
+</tr>
+<tr id="Status-pod_version_status">
+<td><code>podVersionStatus</code></td>
+<td><code><a href="https://istio.io/docs/reference/config/networking/v1alpha3/gateway.html#PodVersionStatus">PodVersionStatus[]</a></code></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="VersionManager">VersionManager</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="VersionManager-default_version">
+<td><code>defaultVersion</code></td>
+<td><code>string</code></td>
+<td>
+<p>If no version is specified, the default version is injected</p>
+
+</td>
+</tr>
+<tr id="VersionManager-retry_policy">
+<td><code>retryPolicy</code></td>
+<td><code><a href="https://istio.io/docs/reference/config/networking/v1alpha3/gateway.html#RetryPolicy">RetryPolicy</a></code></td>
+<td>
+<p>Upgrade failed retry policy</p>
+
+</td>
+</tr>
+<tr id="VersionManager-sidecar_version_spec">
+<td><code>sidecarVersionSpec</code></td>
+<td><code><a href="https://istio.io/docs/reference/config/networking/v1alpha3/gateway.html#SidecarVersionSpec">SidecarVersionSpec[]</a></code></td>
+<td>
+<p>Specify upgrade pod range</p>
+
+</td>
+</tr>
+<tr id="VersionManager-status">
+<td><code>status</code></td>
+<td><code><a href="https://istio.io/docs/reference/config/networking/v1alpha3/gateway.html#Status">Status</a></code></td>
+<td>
+<p>Upgrade state under namespace</p>
+
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="ViaDeployment">ViaDeployment</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="ViaDeployment-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="ViaLabelSelector">ViaLabelSelector</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="ViaLabelSelector-labels">
+<td><code>labels</code></td>
+<td><code>map&lt;string,&nbsp;string&gt;</code></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="ViaService">ViaService</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="ViaService-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 id="ViaStatefulSet">ViaStatefulSet</h2>
+<section>
+<table class="message-fields">
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr id="ViaStatefulSet-name">
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
