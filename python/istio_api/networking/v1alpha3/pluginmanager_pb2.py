@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='istio.networking.v1alpha3',
   syntax='proto3',
   serialized_options=_b('Z istio.io/api/networking/v1alpha3'),
-  serialized_pb=_b('\n\'networking/v1alpha3/pluginmanager.proto\x12\x19istio.networking.v1alpha3\x1a\x1cgoogle/protobuf/struct.proto\"\xd0\x01\n\rPluginManager\x12U\n\x0fworkload_labels\x18\x01 \x03(\x0b\x32<.istio.networking.v1alpha3.PluginManager.WorkloadLabelsEntry\x12\x31\n\x06plugin\x18\x02 \x03(\x0b\x32!.istio.networking.v1alpha3.Plugin\x1a\x35\n\x13WorkloadLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"Q\n\x06Plugin\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12\x0c\n\x04name\x18\x02 \x01(\t\x12)\n\x08settings\x18\x03 \x01(\x0b\x32\x17.google.protobuf.StructB\"Z istio.io/api/networking/v1alpha3b\x06proto3')
+  serialized_pb=_b('\n\'networking/v1alpha3/pluginmanager.proto\x12\x19istio.networking.v1alpha3\x1a\x1cgoogle/protobuf/struct.proto\"\xe2\x01\n\rPluginManager\x12U\n\x0fworkload_labels\x18\x01 \x03(\x0b\x32<.istio.networking.v1alpha3.PluginManager.WorkloadLabelsEntry\x12\x31\n\x06plugin\x18\x02 \x03(\x0b\x32!.istio.networking.v1alpha3.Plugin\x12\x10\n\x08gateways\x18\x03 \x03(\t\x1a\x35\n\x13WorkloadLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"Q\n\x06Plugin\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12\x0c\n\x04name\x18\x02 \x01(\t\x12)\n\x08settings\x18\x03 \x01(\x0b\x32\x17.google.protobuf.StructB\"Z istio.io/api/networking/v1alpha3b\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_struct__pb2.DESCRIPTOR,])
 
@@ -60,8 +60,8 @@ _PLUGINMANAGER_WORKLOADLABELSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=256,
-  serialized_end=309,
+  serialized_start=274,
+  serialized_end=327,
 )
 
 _PLUGINMANAGER = _descriptor.Descriptor(
@@ -85,6 +85,13 @@ _PLUGINMANAGER = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gateways', full_name='istio.networking.v1alpha3.PluginManager.gateways', index=2,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -98,7 +105,7 @@ _PLUGINMANAGER = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=101,
-  serialized_end=309,
+  serialized_end=327,
 )
 
 
@@ -142,8 +149,8 @@ _PLUGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=311,
-  serialized_end=392,
+  serialized_start=329,
+  serialized_end=410,
 )
 
 _PLUGINMANAGER_WORKLOADLABELSENTRY.containing_type = _PLUGINMANAGER

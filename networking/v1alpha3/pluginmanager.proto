@@ -16,6 +16,11 @@ message PluginManager {
     map<string, string> workload_labels = 1;
 
     repeated Plugin plugin = 2;
+
+    // Names of gateways where the rule should be applied to. Gateway names
+    // at the top of the VirtualService (if any) are overridden. The gateway
+    // match is independent of sourceLabels.
+    repeated string gateways = 3;
 }
 
 message Plugin {

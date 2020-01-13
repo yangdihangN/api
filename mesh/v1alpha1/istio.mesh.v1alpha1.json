@@ -407,18 +407,18 @@
         "description": "Network provides information about the endpoints in a routable L3 network. A single routable L3 network can have one or more service registries. Note that the network has no relation to the locality of the endpoint. The endpoint locality will be obtained from the service registry.",
         "type": "object",
         "properties": {
-          "endpoints": {
-            "description": "REQUIRED: The list of endpoints in the network (obtained through the constituent service registries or from CIDR ranges). All endpoints in the network are directly accessible to one another.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/istio.mesh.v1alpha1.Network.NetworkEndpoints"
-            }
-          },
           "gateways": {
             "description": "REQUIRED: Set of gateways associated with the network.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/istio.mesh.v1alpha1.Network.IstioNetworkGateway"
+            }
+          },
+          "endpoints": {
+            "description": "REQUIRED: The list of endpoints in the network (obtained through the constituent service registries or from CIDR ranges). All endpoints in the network are directly accessible to one another.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/istio.mesh.v1alpha1.Network.NetworkEndpoints"
             }
           }
         }
