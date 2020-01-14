@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='istio.networking.v1alpha3',
   syntax='proto3',
   serialized_options=_b('Z istio.io/api/networking/v1alpha3'),
-  serialized_pb=_b('\n(networking/v1alpha3/gateway_plugin.proto\x12\x19istio.networking.v1alpha3\x1a\x1cgoogle/protobuf/struct.proto\"\x91\x01\n\rGatewayPlugin\x12\r\n\x05route\x18\x01 \x03(\t\x12\x0c\n\x04host\x18\x02 \x03(\t\x12\x0f\n\x07service\x18\x03 \x03(\t\x12\x33\n\x07plugins\x18\x04 \x03(\x0b\x32\".istio.networking.v1alpha3.plugins\x12\x0f\n\x07gateway\x18\x05 \x03(\t\x12\x0c\n\x04user\x18\x06 \x03(\t\"B\n\x07plugins\x12\x0c\n\x04name\x18\x01 \x01(\t\x12)\n\x08settings\x18\x02 \x01(\x0b\x32\x17.google.protobuf.StructB\"Z istio.io/api/networking/v1alpha3b\x06proto3')
+  serialized_pb=_b('\n(networking/v1alpha3/gateway_plugin.proto\x12\x19istio.networking.v1alpha3\x1a\x1cgoogle/protobuf/struct.proto\"\xa9\x01\n\rGatewayPlugin\x12\r\n\x05route\x18\x01 \x03(\t\x12\x0c\n\x04host\x18\x02 \x03(\t\x12\x0f\n\x07service\x18\x03 \x03(\t\x12\x33\n\x07plugins\x18\x04 \x03(\x0b\x32\".istio.networking.v1alpha3.plugins\x12\x0f\n\x07gateway\x18\x05 \x03(\t\x12\x0c\n\x04user\x18\x06 \x03(\t\x12\x16\n\x0eisGroupSetting\x18\x07 \x01(\x08\"B\n\x07plugins\x12\x0c\n\x04name\x18\x01 \x01(\t\x12)\n\x08settings\x18\x02 \x01(\x0b\x32\x17.google.protobuf.StructB\"Z istio.io/api/networking/v1alpha3b\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_struct__pb2.DESCRIPTOR,])
 
@@ -76,6 +76,13 @@ _GATEWAYPLUGIN = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='isGroupSetting', full_name='istio.networking.v1alpha3.GatewayPlugin.isGroupSetting', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -89,7 +96,7 @@ _GATEWAYPLUGIN = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=102,
-  serialized_end=247,
+  serialized_end=271,
 )
 
 
@@ -126,8 +133,8 @@ _PLUGINS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=249,
-  serialized_end=315,
+  serialized_start=273,
+  serialized_end=339,
 )
 
 _GATEWAYPLUGIN.fields_by_name['plugins'].message_type = _PLUGINS
