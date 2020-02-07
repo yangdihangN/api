@@ -1,5 +1,42 @@
 syntax = "proto3";
 
+// $title: GatewayPlugin
+// $description: Plugin settings for gateway-proxy
+// $location: https://istio.io/docs/reference/config/networking/v1alpha3/gateway_plugin.html
+
+// GatewayPlugin 用于设置网关扩展插件配置，配置生效范围有3个级别
+// route级别，对应同一route name下的路由规则
+// host级别，对应同一host下的路由规则
+// service级别，对应统一service下的路由规则vs中的destination可以确认该规则隶属的服务
+
+// 示例如下：
+// apiVersion: networking.istio.io/v1alpha3
+// kind: GatewayPlugin
+// metadata:
+//   name: project1-3-458-rewrite
+// spec:
+//   gateway:
+//   - gateway-proxy-1
+//   host:
+//   - 103.196.65.178
+//   plugins:
+//   - name: com.netease.rewrite
+//     settings:
+//       request_transformations:
+//       - conditions:
+//         - headers:
+//           - name: :path
+//             regex_match: /aaaaaaa/(.*)
+//         transformation_template:
+//           extractors:
+//             $1:
+//               header: :path
+//               regex: /aaaaaaa/(.*)
+//               subgroup: 1
+//           headers:
+//             :path:
+//               text: /{{$1}}
+//           parse_body_behavior: DontParse
 import "google/protobuf/struct.proto";
 
 package istio.networking.v1alpha3;

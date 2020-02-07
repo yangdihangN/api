@@ -1808,7 +1808,7 @@ func (m *HTTPRedirect) GetRedirectCode() uint32 {
 // HTTPRewrite can be used to rewrite specific parts of a HTTP request
 // before forwarding the request to the destination. Rewrite primitive can
 // be used only with HTTPRouteDestination. The following example
-// demonstrates how to rewrite the URL prefix for api call (/ratings) to
+// defmonstrates how to rewrite the URL prefix for api call (/ratings) to
 // ratings service before making the actual API call.
 //
 // ```yaml

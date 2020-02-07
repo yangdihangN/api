@@ -1,5 +1,44 @@
 syntax = "proto3";
 
+// $title: PluginManager
+// $description: Global Plugin settings
+// $location: https://istio.io/docs/reference/config/networking/v1alpha3/pluginmanager.html
+
+// PluginManager 用于管理插件，以及插件在全局维度上的配置，enable选项可以启用或禁用某插件
+// 示例如下：
+// apiVersion: networking.istio.io/v1alpha3
+// kind: PluginManager
+// metadata:
+//   name: gw-cluster-gateway-proxy
+//   namespace: gateway-system
+// spec:
+//   plugin:
+//   - enable: true
+//     name: envoy.cors
+//   - enable: true
+//     name: envoy.fault
+//   - enable: true
+//     name: com.netease.iprestriction
+//   - enable: true
+//     name: com.netease.transformation
+//   - enable: false
+//     name: com.netease.resty
+//   - enable: true
+//     name: com.netease.metadatahub
+//   - enable: true
+//     name: com.netease.supercache
+//     settings:
+//       apis_prefix: testremove
+//       used_caches:
+//         local: {}
+//         redis:
+//           general:
+//             host: 10.107.16.138
+//             port: 6379
+//           timeout: 100
+//   workloadLabels:
+//     gw_cluster: gateway-proxy
+
 import "google/protobuf/struct.proto";
 
 package istio.networking.v1alpha3;
