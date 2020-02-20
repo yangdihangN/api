@@ -53,14 +53,14 @@ policy.</p>
 <section>
 <p>Certificate configures the provision of a certificate and its key.
 Example 1: key and cert stored in a secret
-&lbrace; secretName: galley-cert
+{ secretName: galley-cert
   secretNamespace: istio-system
   dnsNames:
     - galley.istio-system.svc
     - galley.mydomain.com
 }
 Example 2: key and cert stored in a directory
-&lbrace; dnsNames:
+{ dnsNames:
     - pilot.istio-system
     - pilot.istio-system.svc
     - pilot.mydomain.com
@@ -295,7 +295,8 @@ the first bits of data. For server first protocols like MySQL,
 MongoDB, etc., Envoy will timeout on the protocol detection after
 the specified period, defaulting to non mTLS plain TCP
 traffic. Set this field to tweak the period that Envoy will wait
-for the client to send the first bits of data. (MUST BE &gt;=1ms)</p>
+for the client to send the first bits of data. (MUST BE &gt;=1ms or
+0s to disable)</p>
 
 </td>
 <td>
@@ -428,14 +429,17 @@ No
 <td><code>outboundTrafficPolicy</code></td>
 <td><code><a href="#MeshConfig-OutboundTrafficPolicy">OutboundTrafficPolicy</a></code></td>
 <td>
-<p>Set the default behavior of the sidecar for handling outbound traffic
-from the application.  If your application uses one or more external
-services that are not known apriori, setting the policy to ALLOW<em>ANY
-will cause the sidecars to route any unknown traffic originating from
-the application to its requested destination.  Users are strongly
-encouraged to use ServiceEntries to explicitly declare any external
-dependencies, instead of using allow</em>any, so that traffic to these
-services can be monitored.</p>
+<p>Set the default behavior of the sidecar for handling outbound
+traffic from the application.  If your application uses one or
+more external services that are not known apriori, setting the
+policy to ALLOW<em>ANY will cause the sidecars to route any unknown
+traffic originating from the application to its requested
+destination.  Users are strongly encouraged to use ServiceEntries
+to explicitly declare any external dependencies, instead of using
+allow</em>any, so that traffic to these services can be
+monitored. Can be overridden at a Sidecar level by setting the
+OutboundTrafficPolicy in the <a href="https://istio.io/docs/reference/config/networking/sidecar/#OutboundTrafficPolicy">Sidecar
+API</a>.</p>
 
 </td>
 <td>
@@ -741,6 +745,17 @@ No
 <td><code><a href="#Certificate">Certificate[]</a></code></td>
 <td>
 <p>Configure the provision of certificates.</p>
+
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="MeshConfig-thrift_config">
+<td><code>thriftConfig</code></td>
+<td><code><a href="#MeshConfig-ThriftConfig">ThriftConfig</a></code></td>
+<td>
+<p>Set configuration for Thrift protocol</p>
 
 </td>
 <td>

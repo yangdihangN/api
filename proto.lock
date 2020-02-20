@@ -12890,13 +12890,7 @@
                         "value": "/v1/services/{service_name}/configs/{config_id}"
                       },
                       {
-                        "name": "additional_bindings",
-                        "aggregated": [
-                          {
-                            "name": "get",
-                            "value": "/v1/services/{service_name}/config"
-                          }
-                        ]
+                        "name": "additional_bindings"
                       }
                     ]
                   }
@@ -36095,6 +36089,11 @@
                 "name": "certificates",
                 "type": "Certificate",
                 "is_repeated": true
+              },
+              {
+                "id": 49,
+                "name": "thrift_config",
+                "type": "ThriftConfig"
               }
             ],
             "reserved_ids": [
@@ -36109,6 +36108,21 @@
                     "id": 1,
                     "name": "mode",
                     "type": "Mode"
+                  }
+                ]
+              },
+              {
+                "name": "ThriftConfig",
+                "fields": [
+                  {
+                    "id": 1,
+                    "name": "rate_limit_url",
+                    "type": "string"
+                  },
+                  {
+                    "id": 2,
+                    "name": "rate_limit_timeout",
+                    "type": "google.protobuf.Duration"
                   }
                 ]
               }
@@ -38731,6 +38745,11 @@
                     "type": "bool"
                   },
                   {
+                    "id": 5,
+                    "name": "http_query_parameter_name",
+                    "type": "string"
+                  },
+                  {
                     "id": 4,
                     "name": "minimum_ring_size",
                     "type": "uint64"
@@ -38764,10 +38783,6 @@
                           {
                             "name": "(google.api.field_behavior)",
                             "value": "REQUIRED"
-                          },
-                          {
-                            "name": "(gogoproto.stdduration)",
-                            "value": "true"
                           }
                         ]
                       }
@@ -39228,6 +39243,10 @@
               {
                 "name": "INSERT_AFTER",
                 "integer": 5
+              },
+              {
+                "name": "INSERT_FIRST",
+                "integer": 6
               }
             ]
           }
@@ -40132,18 +40151,17 @@
                 "id": 3,
                 "name": "egress",
                 "type": "IstioEgressListener",
-                "is_repeated": true,
-                "options": [
-                  {
-                    "name": "(google.api.field_behavior)",
-                    "value": "REQUIRED"
-                  }
-                ]
+                "is_repeated": true
               },
               {
                 "id": 4,
                 "name": "outbound_traffic_policy",
                 "type": "OutboundTrafficPolicy"
+              },
+              {
+                "id": 5,
+                "name": "inbound_tls",
+                "type": "Server.TLSOptions"
               }
             ]
           },
@@ -40181,6 +40199,11 @@
                     "value": "REQUIRED"
                   }
                 ]
+              },
+              {
+                "id": 5,
+                "name": "inbound_tls",
+                "type": "Server.TLSOptions"
               }
             ]
           },
@@ -40242,6 +40265,11 @@
                 "id": 1,
                 "name": "mode",
                 "type": "Mode"
+              },
+              {
+                "id": 2,
+                "name": "egress_proxy",
+                "type": "istio.networking.v1alpha3.Destination"
               }
             ]
           }
@@ -40252,6 +40280,9 @@
           },
           {
             "path": "networking/v1alpha3/gateway.proto"
+          },
+          {
+            "path": "networking/v1alpha3/virtual_service.proto"
           }
         ],
         "package": {
@@ -40565,6 +40596,11 @@
                 "id": 10,
                 "name": "ignore_uri_case",
                 "type": "bool"
+              },
+              {
+                "id": 13,
+                "name": "source_namespace",
+                "type": "string"
               }
             ],
             "maps": [
@@ -40589,6 +40625,14 @@
                 "field": {
                   "id": 9,
                   "name": "query_params",
+                  "type": "StringMatch"
+                }
+              },
+              {
+                "key_type": "string",
+                "field": {
+                  "id": 12,
+                  "name": "without_headers",
                   "type": "StringMatch"
                 }
               }
@@ -40677,6 +40721,11 @@
                 "name": "gateways",
                 "type": "string",
                 "is_repeated": true
+              },
+              {
+                "id": 6,
+                "name": "source_namespace",
+                "type": "string"
               }
             ],
             "maps": [
@@ -40721,6 +40770,11 @@
                 "name": "gateways",
                 "type": "string",
                 "is_repeated": true
+              },
+              {
+                "id": 7,
+                "name": "source_namespace",
+                "type": "string"
               }
             ],
             "maps": [
@@ -40818,6 +40872,11 @@
                 "id": 3,
                 "name": "retry_on",
                 "type": "string"
+              },
+              {
+                "id": 4,
+                "name": "retry_remote_localities",
+                "type": "google.protobuf.BoolValue"
               }
             ]
           },
@@ -41240,6 +41299,11 @@
                     "type": "bool"
                   },
                   {
+                    "id": 5,
+                    "name": "http_query_parameter_name",
+                    "type": "string"
+                  },
+                  {
                     "id": 4,
                     "name": "minimum_ring_size",
                     "type": "uint64"
@@ -41273,10 +41337,6 @@
                           {
                             "name": "(google.api.field_behavior)",
                             "value": "REQUIRED"
-                          },
-                          {
-                            "name": "(gogoproto.stdduration)",
-                            "value": "true"
                           }
                         ]
                       }
@@ -42032,18 +42092,17 @@
                 "id": 3,
                 "name": "egress",
                 "type": "IstioEgressListener",
-                "is_repeated": true,
-                "options": [
-                  {
-                    "name": "(google.api.field_behavior)",
-                    "value": "REQUIRED"
-                  }
-                ]
+                "is_repeated": true
               },
               {
                 "id": 4,
                 "name": "outbound_traffic_policy",
                 "type": "OutboundTrafficPolicy"
+              },
+              {
+                "id": 5,
+                "name": "inbound_tls",
+                "type": "Server.TLSOptions"
               }
             ]
           },
@@ -42081,6 +42140,11 @@
                     "value": "REQUIRED"
                   }
                 ]
+              },
+              {
+                "id": 5,
+                "name": "inbound_tls",
+                "type": "Server.TLSOptions"
               }
             ]
           },
@@ -42142,6 +42206,11 @@
                 "id": 1,
                 "name": "mode",
                 "type": "Mode"
+              },
+              {
+                "id": 2,
+                "name": "egress_proxy",
+                "type": "istio.networking.v1beta1.Destination"
               }
             ]
           }
@@ -42152,6 +42221,9 @@
           },
           {
             "path": "networking/v1beta1/gateway.proto"
+          },
+          {
+            "path": "networking/v1beta1/virtual_service.proto"
           }
         ],
         "package": {
@@ -42465,6 +42537,11 @@
                 "id": 10,
                 "name": "ignore_uri_case",
                 "type": "bool"
+              },
+              {
+                "id": 13,
+                "name": "source_namespace",
+                "type": "string"
               }
             ],
             "maps": [
@@ -42489,6 +42566,14 @@
                 "field": {
                   "id": 9,
                   "name": "query_params",
+                  "type": "StringMatch"
+                }
+              },
+              {
+                "key_type": "string",
+                "field": {
+                  "id": 12,
+                  "name": "without_headers",
                   "type": "StringMatch"
                 }
               }
@@ -42577,6 +42662,11 @@
                 "name": "gateways",
                 "type": "string",
                 "is_repeated": true
+              },
+              {
+                "id": 6,
+                "name": "source_namespace",
+                "type": "string"
               }
             ],
             "maps": [
@@ -42621,6 +42711,11 @@
                 "name": "gateways",
                 "type": "string",
                 "is_repeated": true
+              },
+              {
+                "id": 7,
+                "name": "source_namespace",
+                "type": "string"
               }
             ],
             "maps": [
@@ -43014,7 +43109,7 @@
               {
                 "id": 11,
                 "name": "tag",
-                "type": "string"
+                "type": "TypeInterface"
               },
               {
                 "id": 30,
@@ -43089,7 +43184,7 @@
               {
                 "id": 11,
                 "name": "tag",
-                "type": "string"
+                "type": "TypeInterface"
               },
               {
                 "id": 50,
@@ -43125,7 +43220,7 @@
               {
                 "id": 3,
                 "name": "hpa_spec",
-                "type": "k8s.io.api.autoscaling.v2beta1.HorizontalPodAutoscalerSpec"
+                "type": "HorizontalPodAutoscalerSpec"
               },
               {
                 "id": 4,
@@ -43170,7 +43265,8 @@
               {
                 "id": 14,
                 "name": "tolerations",
-                "type": "Toleration"
+                "type": "k8s.io.api.core.v1.Toleration",
+                "is_repeated": true
               },
               {
                 "id": 100,
@@ -43264,7 +43360,7 @@
             "path": "google/protobuf/any.proto"
           },
           {
-            "path": "k8s.io/api/autoscaling/v2beta1/generated.proto"
+            "path": "k8s.io/api/core/v1/generated.proto"
           },
           {
             "path": "operator/v1alpha1/kubernetes.proto"
@@ -43917,32 +44013,173 @@
             ]
           },
           {
-            "name": "Toleration",
+            "name": "HorizontalPodAutoscalerSpec",
             "fields": [
               {
                 "id": 1,
-                "name": "key",
+                "name": "scaleTargetRef",
+                "type": "CrossVersionObjectReference"
+              },
+              {
+                "id": 2,
+                "name": "minReplicas",
+                "type": "int32"
+              },
+              {
+                "id": 3,
+                "name": "maxReplicas",
+                "type": "int32"
+              },
+              {
+                "id": 4,
+                "name": "metrics",
+                "type": "MetricSpec",
+                "is_repeated": true
+              }
+            ]
+          },
+          {
+            "name": "CrossVersionObjectReference",
+            "fields": [
+              {
+                "id": 1,
+                "name": "kind",
                 "type": "string"
               },
               {
                 "id": 2,
-                "name": "operator",
+                "name": "name",
                 "type": "string"
               },
               {
                 "id": 3,
-                "name": "value",
+                "name": "apiVersion",
                 "type": "string"
+              }
+            ]
+          },
+          {
+            "name": "MetricSpec",
+            "fields": [
+              {
+                "id": 1,
+                "name": "type",
+                "type": "string"
+              },
+              {
+                "id": 2,
+                "name": "object",
+                "type": "ObjectMetricSource"
+              },
+              {
+                "id": 3,
+                "name": "pods",
+                "type": "PodsMetricSource"
               },
               {
                 "id": 4,
-                "name": "effect",
-                "type": "string"
+                "name": "resource",
+                "type": "ResourceMetricSource"
               },
               {
                 "id": 5,
-                "name": "tolerationSeconds",
-                "type": "int64"
+                "name": "external",
+                "type": "ExternalMetricSource"
+              }
+            ]
+          },
+          {
+            "name": "ObjectMetricSource",
+            "fields": [
+              {
+                "id": 1,
+                "name": "target",
+                "type": "CrossVersionObjectReference"
+              },
+              {
+                "id": 2,
+                "name": "metricName",
+                "type": "string"
+              },
+              {
+                "id": 3,
+                "name": "targetValue",
+                "type": "k8s.io.apimachinery.pkg.api.resource.Quantity"
+              },
+              {
+                "id": 4,
+                "name": "selector",
+                "type": "k8s.io.apimachinery.pkg.apis.meta.v1.LabelSelector"
+              },
+              {
+                "id": 5,
+                "name": "averageValue",
+                "type": "k8s.io.apimachinery.pkg.api.resource.Quantity"
+              }
+            ]
+          },
+          {
+            "name": "PodsMetricSource",
+            "fields": [
+              {
+                "id": 1,
+                "name": "metricName",
+                "type": "string"
+              },
+              {
+                "id": 2,
+                "name": "targetAverageValue",
+                "type": "k8s.io.apimachinery.pkg.api.resource.Quantity"
+              },
+              {
+                "id": 3,
+                "name": "selector",
+                "type": "k8s.io.apimachinery.pkg.apis.meta.v1.LabelSelector"
+              }
+            ]
+          },
+          {
+            "name": "ResourceMetricSource",
+            "fields": [
+              {
+                "id": 1,
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "id": 2,
+                "name": "targetAverageUtilization",
+                "type": "int32"
+              },
+              {
+                "id": 3,
+                "name": "targetAverageValue",
+                "type": "k8s.io.apimachinery.pkg.api.resource.Quantity"
+              }
+            ]
+          },
+          {
+            "name": "ExternalMetricSource",
+            "fields": [
+              {
+                "id": 1,
+                "name": "metricName",
+                "type": "string"
+              },
+              {
+                "id": 2,
+                "name": "metricSelector",
+                "type": "k8s.io.apimachinery.pkg.apis.meta.v1.LabelSelector"
+              },
+              {
+                "id": 3,
+                "name": "targetValue",
+                "type": "k8s.io.apimachinery.pkg.api.resource.Quantity"
+              },
+              {
+                "id": 4,
+                "name": "targetAverageValue",
+                "type": "k8s.io.apimachinery.pkg.api.resource.Quantity"
               }
             ]
           },
@@ -44023,11 +44260,27 @@
               {
                 "id": 13,
                 "name": "tag",
-                "type": "string"
+                "type": "TypeInterface2"
               },
               {
                 "id": 14,
                 "name": "resource_suffix",
+                "type": "string",
+                "options": [
+                  {
+                    "name": "deprecated",
+                    "value": "true"
+                  }
+                ]
+              },
+              {
+                "id": 15,
+                "name": "namespace",
+                "type": "string"
+              },
+              {
+                "id": 16,
+                "name": "revision",
                 "type": "string"
               },
               {
@@ -44111,6 +44364,9 @@
           },
           {
             "name": "TypeMapStringInterface2"
+          },
+          {
+            "name": "TypeInterface2"
           }
         ],
         "imports": [
@@ -45868,6 +46124,86 @@
         "imports": [
           {
             "path": "google/api/field_behavior.proto"
+          }
+        ],
+        "package": {
+          "name": "istio.security.v1beta1"
+        },
+        "options": [
+          {
+            "name": "go_package",
+            "value": "istio.io/api/security/v1beta1"
+          }
+        ]
+      }
+    },
+    {
+      "protopath": "security:/:v1beta1:/:peer_authentication.proto",
+      "def": {
+        "enums": [
+          {
+            "name": "MutualTLS.Mode",
+            "enum_fields": [
+              {
+                "name": "UNSET"
+              },
+              {
+                "name": "DISABLE",
+                "integer": 1
+              },
+              {
+                "name": "PERMISSIVE",
+                "integer": 2
+              },
+              {
+                "name": "STRICT",
+                "integer": 3
+              }
+            ]
+          }
+        ],
+        "messages": [
+          {
+            "name": "PeerAuthentication",
+            "fields": [
+              {
+                "id": 1,
+                "name": "selector",
+                "type": "istio.type.v1beta1.WorkloadSelector"
+              },
+              {
+                "id": 2,
+                "name": "mtls",
+                "type": "MutualTLS"
+              }
+            ],
+            "maps": [
+              {
+                "key_type": "uint32",
+                "field": {
+                  "id": 3,
+                  "name": "port_level_mtls",
+                  "type": "MutualTLS"
+                }
+              }
+            ],
+            "messages": [
+              {
+                "name": "MutualTLS",
+                "fields": [
+                  {
+                    "id": 1,
+                    "name": "mode",
+                    "type": "Mode"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "imports": [
+          {
+            "path": "type/v1beta1/selector.proto"
           }
         ],
         "package": {
